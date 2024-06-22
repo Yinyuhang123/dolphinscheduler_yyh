@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseLinuxShellInterceptorBuilder<T extends BaseLinuxShellInterceptorBuilder<T, Y>, Y extends BaseShellInterceptor>
         extends
-        BaseShellInterceptorBuilder<T, Y> {
+            BaseShellInterceptorBuilder<T, Y> {
 
     protected void generateShellScript() throws IOException {
         List<String> finalScripts = new ArrayList<>();
