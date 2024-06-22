@@ -127,6 +127,7 @@ public class JavaTask extends AbstractTask {
             }
             Preconditions.checkNotNull(command, "command not be null.");
             IShellInterceptorBuilder<?, ?> shellActuatorBuilder = ShellInterceptorBuilderFactory.newBuilder()
+                    .properties(ParameterUtils.convert(taskRequest.getPrepareParamsMap()))
                     .appendScript(command);
             TaskResponse taskResponse = shellCommandExecutor.run(shellActuatorBuilder, taskCallBack);
             log.info("java task run result: {}", taskResponse);
@@ -179,7 +180,7 @@ public class JavaTask extends AbstractTask {
     protected String buildJarCommand() {
         ResourceContext resourceContext = taskRequest.getResourceContext();
         String mainJarName = resourceContext.getResourceItem(javaParameters.getMainJar().getResourceName())
-                .getResourceAbsolutePathInLocal();
+                .getResourceRelativePath();
         StringBuilder builder = new StringBuilder();
         builder.append(getJavaCommandPath())
                 .append("java").append(" ")
